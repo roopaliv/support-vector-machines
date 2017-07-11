@@ -1,0 +1,17 @@
+ bias = np.ones((train_data.shape[0],1))
+    training_data = np.append(bias, train_data, axis =1)
+
+    weights = params.reshape(n_feature+1, n_class)
+    first = np.dot(training_data, weights)
+    second = np.exp(first)
+    third = np.sum(second, axis = 1)
+
+    third = third.reshape(third.shape[0],1)
+
+    prob = second/third
+
+
+    error = (-1) * (np.sum(labeli*np.log(prob)))/n_data
+    print(error)
+    error_grad = (np.dot(np.subtract(prob, labeli).T, training_data).T)/n_data
+    error_grad = error_grad.flatten()
